@@ -240,3 +240,39 @@ function sum(...args) {
   return add;
 }
 console.log(sum(1, 2, 3));
+
+///Zig zag - conversation
+// Input: s = "PAYPALISHIRING", numRows = 4
+// Output: "PINALSIGYAHRPI"
+// Explanation:
+// P     I    N
+// A   L S  I G
+// Y A   H R
+// P     I
+const convert = (s, numRows) => {
+  let len = s.length;
+  if (len <= 2) return s;
+  let a = [];
+  let row = 0;
+  let isDown = true;
+
+  for (let i = 0; i < len; i++) {
+    if (!a[row]) {
+      a[row] = s.charAt(i);
+    } else {
+      a[row] += s.charAt(i);
+    }
+
+    if (row === numRows - 1) isDown = false;
+    if (row === 0) isDown = true;
+    row = isDown ? row + 1 : row - 1;
+  }
+  //console.log("a:", a);
+  let newS = "";
+  a.forEach(function (element, index) {
+    newS += element;
+  });
+
+  return newS;
+};
+console.log(convert("paypalishiring", 5));
