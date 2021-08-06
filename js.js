@@ -276,3 +276,88 @@ const convert = (s, numRows) => {
   return newS;
 };
 console.log(convert("paypalishiring", 5));
+
+/////////
+function ensure(value) {
+  if (value === undefined || value === "") {
+    throw new Error("no arguments");
+  }
+
+  return value;
+}
+try {
+  console.log(ensure());
+} catch (err) {
+  console.log(err);
+}
+
+//////////
+function removeProperty(obj, prop) {
+  if (prop in obj) {
+    delete obj[prop];
+    return true;
+  } else {
+    return false;
+  }
+}
+
+//////////
+
+function createCheckDigit(membershipId) {
+  // Write the code that goes here.
+  if (membershipId.length > 1) {
+    var dgts = membershipId.split("");
+    var sum = 0;
+    dgts.forEach((dgt) => {
+      sum += Number(dgt);
+    });
+
+    //console.log('Loop 1');
+    return createCheckDigit(sum + "");
+  } else {
+    //console.log('Out of Loop 1');
+    return Number(membershipId);
+  }
+}
+
+console.log(createCheckDigit("55555"));
+
+// our two sum function which will return
+// all pairs in the array that sum up to S
+function twoSum(arr, S) {
+  let sums = [];
+
+  // check each element in array
+  for (let i = 0; i < arr.length; i++) {
+    // check each other element in the array
+    for (let j = i + 1; j < arr.length; j++) {
+      // determine if these two elements sum to S
+      if (arr[i] + arr[j] === S) {
+        sums.push([arr[i], arr[j]]);
+      }
+    }
+  }
+
+  // return all pairs of integers that sum to S
+  return sums;
+}
+
+twoSum([3, 5, 2, -4, 8, 11], 7);
+
+// it should convert user entered date "12/31/2014" to "20141231" suitable for the API.
+function formatDate(userDate) {
+  var parts = userDate.split("/");
+  if (parts[0].length == 1) parts[0] = "0" + parts[0];
+  if (parts[1].length == 1) parts[1] = "0" + parts[1];
+  return parts[2] + parts[0] + parts[1];
+}
+//after click hidden and after 1second visible
+let clickButton = document.getElementById("click");
+//console.log("clickButton:", clickButton);
+clickButton.addEventListener("click", () => {
+  //console.log("hidden");
+  clickButton.style.visibility = "hidden";
+  setTimeout(() => {
+    clickButton.style.visibility = "visible";
+  }, 1000);
+});
