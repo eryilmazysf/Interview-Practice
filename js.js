@@ -361,3 +361,78 @@ clickButton.addEventListener("click", () => {
     clickButton.style.visibility = "visible";
   }, 1000);
 });
+//object
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  id: 5566,
+  fullName: function () {
+    return this.firstName + " " + this.lastName;
+  },
+};
+console.log(person.fullName());
+
+//function Object
+function Book(type, author) {
+  this.type = type;
+  this.author = author;
+  this.getDetails = function () {
+    return this.type + " written by " + this.author;
+  };
+}
+
+var book = new Book("Fiction", "Peter King");
+
+console.log(book.getDetails()); // => Fiction written by Peter King
+
+///////////calback function//////////////////
+function action(callback, x, y) {
+  var result = callback(x, y);
+  console.log(result);
+}
+
+function add(x, y) {
+  return x + y;
+}
+
+function multiply(x, y) {
+  return x * y;
+}
+
+action(add, 2, 3); // => 5
+action(multiply, 2, 3); // => 6
+
+//lower to upper
+const str = "The Quick Brown Fox";
+let newStr = str
+  .split("")
+  .map((i) => (i === i.toLowerCase() ? i.toUpperCase() : i.toLowerCase()))
+  .join("");
+console.log(newStr);
+
+//reduce we use reducer in iterable array
+const arr = [1, 2, 3, 4];
+const reducer = (acc, current) => acc + current;
+console.log(arr.reduce(reducer));
+
+//for in
+const parent = {
+  fn: "Mike",
+  ls: "Mily",
+  profession: "barber",
+};
+function Baby() {
+  this.fn = "unnamed";
+  this.weight = 3.4;
+}
+Baby.prototype = parent;
+let sally = new Baby();
+sally.fn = "Sally";
+
+for (const prop in sally) {
+  if (Object.hasOwnProperty.call(sally, prop)) {
+    const element = sally[prop];
+    console.log(prop, ":>>", element);
+  }
+}
+console.log(sally.__proto__);
