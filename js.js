@@ -46,7 +46,7 @@ function isPolindrome(word) {
   if (sentence === word) {
     return true;
   } else {
-    return flase;
+    return false;
   }
 }
 
@@ -229,9 +229,9 @@ let myObject = {
   name: "yusuf",
   age: 27,
 };
+console.log(myObject["name"]);
 
 // Args and Obj
-console.log(myObject["name"]);
 function sum(...args) {
   let add = 0;
   for (let i = 0; i < args.length; i++) {
@@ -436,3 +436,87 @@ for (const prop in sally) {
   }
 }
 console.log(sally.__proto__);
+
+//10 songs
+//shuffle one time playing each song randomly
+//play function
+//do not delete orijinal data
+const songs = ["a", "b", "c", "d", "e", "f", "g"];
+//console.log(random);
+const playedSong = [];
+const playMySong = () => {
+  let random = Math.floor(Math.random() * songs.length);
+  for (let i = 0; i < songs.length; i++) {
+    //console.log("random:", random);
+    if (!playedSong.includes(songs[random])) {
+      playedSong.push(songs[random]);
+    }
+  }
+  return console.log(playedSong);
+};
+playMySong();
+
+//compare age
+// p1 = Person("Samuel", 24)
+// p2 = Person("Joel", 36)
+// p3 = Person("Lily", 24)
+// p1.compareAge(p2) ➞ "Joel is older than me."
+// p2.compareAge(p1) ➞ "Samuel is younger than me."
+// p1.compareAge(p3) ➞ "Lily is the same age as me."
+
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  compareAge(other) {
+    if (this.age < other.age) {
+      return `${other.name} is older than me.`;
+    } else if (this.age > other.age) {
+      return `${other.name} is younger than me.`;
+    } else {
+      return `${other.name} is the same age as me.`;
+    }
+  }
+}
+
+//matchstep
+
+function matchHouses(step) {
+  return step === 0 ? 0 : 5 * step + 1;
+}
+
+//obj to array
+//toArray({ a: 1, b: 2 }) ➞ [["a", 1], ["b", 2]]
+
+function toArray(obj) {
+  var a = [];
+  for (var i in obj) {
+    a.push([i, obj[i]]);
+  }
+  return a;
+}
+console.log(toArray({ a: 1, b: 2 }));
+
+//Architech
+// for (var i = 0; i < 3; i++) {
+//   console.log("i -->", i);
+//   setTimeout(function () {
+//     console.log("i in setTimeout -->", i);
+//     alert(i);
+//   }, 3000 + i);
+// }
+//setTimeout take callback function it runs after another function finishes running
+//in this example i is 5 after finish for loop and copy this i in memory
+for (var i = 0; i < 5; i++) {
+  setTimeout(() => {
+    console.log(i);
+  }, 1000);
+}
+//second parenthes immediately-invoke function expression call function
+(function () {
+  var p = (r = 5);
+})();
+
+console.log("r-->", r);
