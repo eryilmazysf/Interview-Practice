@@ -122,9 +122,9 @@ if (num.length % 2 == 0) {
 let l1 = [1, 2, 4];
 let l2 = [1, 3, 4];
 let l = l1.concat(l2).sort();
-console.log(l);
+console.log("l=>" + l);
 a = ["y", "u", "s", "u", "f"];
-console.log(a.join(" "));
+console.log(a.join(""));
 
 //sprial matrix
 const sprialMatrix = (matrix) => {
@@ -200,11 +200,11 @@ console.log(rotate([1, 2, 3, 4, 5], 2));
 //built-in Func
 
 let x = [1, 2, 3, 4, 5];
-console.log(x.filter((i) => i > 3));
+console.log("filter =>" + x.filter((i) => i > 3));
 let pow = [];
 x.forEach((i) => pow.push(i ** 2));
 console.log(pow);
-console.log(x.reduce((p, c) => p * c));
+console.log(x.reduce((p, c) => p * c, 1));
 
 //reverse words in a string
 
@@ -230,6 +230,7 @@ let myObject = {
   age: 27,
 };
 console.log(myObject["name"]);
+console.log(myObject.name + " " + myObject.age);
 
 // Args and Obj
 function sum(...args) {
@@ -306,8 +307,8 @@ function removeProperty(obj, prop) {
 function createCheckDigit(membershipId) {
   // Write the code that goes here.
   if (membershipId.length > 1) {
-    var dgts = membershipId.split("");
-    var sum = 0;
+    let dgts = membershipId.split("");
+    let sum = 0;
     dgts.forEach((dgt) => {
       sum += Number(dgt);
     });
@@ -346,7 +347,7 @@ twoSum([3, 5, 2, -4, 8, 11], 7);
 
 // it should convert user entered date "12/31/2014" to "20141231" suitable for the API.
 function formatDate(userDate) {
-  var parts = userDate.split("/");
+  let parts = userDate.split("/");
   if (parts[0].length == 1) parts[0] = "0" + parts[0];
   if (parts[1].length == 1) parts[1] = "0" + parts[1];
   return parts[2] + parts[0] + parts[1];
@@ -381,13 +382,13 @@ function Book(type, author) {
   };
 }
 
-var book = new Book("Fiction", "Peter King");
+let book = new Book("Fiction", "Peter King");
 
 console.log(book.getDetails()); // => Fiction written by Peter King
 
 ///////////calback function//////////////////
 function action(callback, x, y) {
-  var result = callback(x, y);
+  let result = callback(x, y);
   console.log(result);
 }
 
@@ -491,8 +492,8 @@ function matchHouses(step) {
 //toArray({ a: 1, b: 2 }) ➞ [["a", 1], ["b", 2]]
 
 function toArray(obj) {
-  var a = [];
-  for (var i in obj) {
+  let a = [];
+  for (let i in obj) {
     a.push([i, obj[i]]);
   }
   return a;
@@ -500,7 +501,7 @@ function toArray(obj) {
 console.log(toArray({ a: 1, b: 2 }));
 
 //Architech
-// for (var i = 0; i < 3; i++) {
+// for (let i = 0; i < 3; i++) {
 //   console.log("i -->", i);
 //   setTimeout(function () {
 //     console.log("i in setTimeout -->", i);
@@ -509,14 +510,251 @@ console.log(toArray({ a: 1, b: 2 }));
 // }
 //setTimeout take callback function it runs after another function finishes running
 //in this example i is 5 after finish for loop and copy this i in memory
-for (var i = 0; i < 5; i++) {
-  setTimeout(() => {
-    console.log(i);
-  }, 1000);
-}
+// for (let i = 0; i < 5; i++) {
+//   setTimeout(() => {
+//     console.log(i);
+//   }, 1000);
+// }
 //second parenthes immediately-invoke function expression call function
 (function () {
-  var p = (r = 5);
+  let p = (r = 5);
 })();
 
 console.log("r-->", r);
+
+const ass = (key, value, obj) => {
+  obj[key] = value;
+};
+const y = { name: "yusuf" };
+const result = ass("s", 2, y);
+console.log({ ass, result });
+const double = (zzz) => {
+  return zzz * 2;
+};
+const rrr = double(2);
+console.log({ rrr });
+
+//Arhitech
+function fl(str) {
+  newletiable = "";
+  str.map((item) => {
+    newletiable += item[0].toUpperCase() + item.slice(1) + " ";
+  });
+  console.log(newletiable);
+  // const a = str.split(" ");
+  //console.log(str);
+}
+fl(["hello", "world"]);
+
+// binar gapFor example, number 9 has binary representation 1001 and contains a binary gap of length 2. The number 529 has binary representation 1000010001 and contains two binary gaps: one of length 4 and one of length 3. The number 20 has binary representation 10100 and contains one binary gap of length 1. The number 15 has binary representation 1111 and has no binary gaps. The number 32 has binary representation 100000 and has no binary gaps.
+function solution(n) {
+  let x = n.toString(2);
+  console.log(x);
+  let current = 0;
+  let big = 0;
+  for (let i = 0; i <= x.length; i++) {
+    if (x[i] === "0") {
+      current += 1;
+    }
+    if (x[i] === "1") {
+      if (current > big) {
+        big = current;
+      }
+      current = 0;
+    }
+  }
+  return big;
+}
+console.log("binary gap =>", solution(32));
+
+//missing number
+
+function missing(nums) {
+  nums.sort((a, b) => {
+    return a - b;
+  });
+  let sum = 0;
+  for (let i = 0; i <= nums.length; i++) {
+    if (nums[i] === sum) {
+      sum++;
+    } else {
+      return sum;
+    }
+  }
+}
+//rotate
+function rotates(nums, k) {
+  let rs = [];
+  let r = k % nums.length;
+  for (let i = nums.length - r; i < nums.length; i++) {
+    rs.push(nums[i]);
+  }
+  for (let i = 0; i < nums.length - r; i++) {
+    rs.push(nums[i]);
+  }
+
+  return rs;
+}
+console.log(rotates([3, 8, 9, 7, 6], 3));
+
+//odd occurency //a xor a =0   a xor 0= a
+function solution(A) {
+  let result = 0;
+
+  for (let element of A) {
+    result ^= element;
+  }
+
+  return result;
+}
+console.log(solution([9, 3, 9, 3, 9, 7, 9]));
+
+//distinct
+function solution(A) {
+  const count = {};
+  for (let i = 0; i < A.length; i++) {
+    count[A[i]] = 1;
+  }
+  console.log(Object.keys(count));
+  return Object.keys(count).length;
+}
+console.log(solution([2, 1, 1, 2, 3, 1]));
+
+//triangle
+function solution(A) {
+  A.sort((a, b) => a - b);
+
+  for (let i = 0; i < A.length - 2; i++) {
+    let p = A[i],
+      q = A[i + 1],
+      r = A[i + 2];
+
+    if (p + q > r && q + r > p && r + p > q) return 1;
+  }
+
+  return 0;
+}
+//brackets
+function solution(bracket) {
+  let brackets = bracket.toString().split("");
+  let stack = [];
+  for (let i = 0; i < brackets.length; i++) {
+    let c = brackets[i];
+    if (c === "{" || c === "(" || c === "[") stack.push(c);
+    else if (c === "}" || c === ")" || c === "]") {
+      let t = stack.pop() + c;
+      if (t !== "{}" && t !== "()" && t !== "[]") return 0;
+    } else return 0;
+  }
+
+  if (stack.length > 0) return 0;
+
+  return 1;
+}
+console.log(solution("[()]"));
+//codility
+function xysolution(cd) {
+  let uniqueArr = [...new Set(cd)];
+  console.log(uniqueArr);
+  uniqueArr.sort((a, b) => {
+    return a - b;
+  });
+  let x = 1;
+  for (let i = 0; i < uniqueArr.length; i++) {
+    if (uniqueArr[i] < 0) {
+      continue;
+    }
+    if (x === uniqueArr[i]) {
+      x += 1;
+    } else {
+      if (!uniqueArr.includes(x)) {
+        return x;
+      }
+    }
+  }
+  return x;
+}
+console.log(xysolution([-5, -1, -2, 0, 1, 2, 2, 4, 6]));
+
+//longest word
+const longestWord = (str) => {
+  return str.split(" ").sort(function (a, b) {
+    return b.length - a.length;
+  })[0];
+};
+console.log(longestWord("yusuf ve yasin okula baslayacaklar"));
+
+//title case
+function titleCase(str) {
+  let titled = str
+    .toLowerCase()
+    .split(" ")
+    .map((item) => {
+      return item[0].toUpperCase() + item.slice(1);
+    });
+  return titled.join(" ");
+}
+console.log(titleCase("I'm a little tea pot"));
+
+//inner loop large number
+
+function largestInner(arr) {
+  let max = [];
+  for (let i = 0; i < arr.length; i++) {
+    let tempMax = arr[i][0];
+    for (let j = 0; j < arr[i].length; j++) {
+      let current = arr[i[j]];
+      if (current > tempMax) {
+        tempMax = current;
+      }
+    }
+    max.push(tempMax);
+  }
+  return max;
+}
+
+console.log(
+  largestInner([
+    [4, 5, 1, 3],
+    [13, 27, 18, 26],
+  ])
+);
+
+//confirmEnding
+function confirmEnd(str, target) {
+  //first way
+  //return str.endsWith(target);
+  //second way
+  // if (str.endsWith(target)) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+  // third way
+  // if (str.substr(-target.length) === target) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+  return str.substr(-target.length) === target;
+}
+console.log(confirmEnd("yusuf", "f"));
+console.log("yusuf".slice(3, 5));
+
+//chunky monkey
+const chunk = (arr, size) => {
+  let groups = [];
+  while (arr.length > 0) {
+    groups.push(arr.splice(0, size)); //splice change original array
+    //arr=arr.slice(0,size)
+  }
+  return groups;
+};
+console.log(chunk(["a", "b", "c", "d"], 2));
+
+//slasher
+function slasher(arr, howmany) {
+  arr.splice(0, howmany);
+  return arr;
+}
+console.log(slasher([1, 2, 3], 2));
