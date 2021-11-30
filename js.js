@@ -758,3 +758,102 @@ function slasher(arr, howmany) {
   return arr;
 }
 console.log(slasher([1, 2, 3], 2));
+
+//mutation
+function mutation(arr) {
+  let firstWord = arr[0].toLowerCase();
+  let secondWord = arr[1].toLowerCase();
+  // for (let i = 0; i < secondWord.length; i++) {
+  //   if (firstWord.indexOf(secondWord[i]) === -1) return false;
+  // }
+  // for (let letter of arr) {
+  //   if (firstWord.indexOf(letter) === -1) return false;
+  // }
+  for (let letter of arr) {
+    if (!firstWord.includes(letter)) return false;
+  }
+  return true;
+}
+console.log(mutation(["hello", "hey"]));
+
+//falsy bouncer
+
+function bouncer(arr) {
+  // let truthies = [];
+  // for (let i of arr) {
+  //   if (i) truthies.push(i);
+  // }
+  // return truthies;
+  return arr.filter((i) => {
+    return i;
+  });
+}
+
+console.log(bouncer([7, "", false, undefined, NaN, null, "hey", 0]));
+
+//Kora
+
+// A palindrome is a sequence of numbers or letters that is the same if read both forward and backward (i.e. abcba, abccba).
+
+// Given an array of letters as input, write a function that could return the number of subsequence palindromes in the array.
+
+// Example: [a, a, b, b, a] as input would return 8.  The possible palindromes are a, a, b, b, a, aa, bb, abba.
+
+//first find subsequence
+//second find polindrum in subsequence array
+
+//longest word
+let arrr = [1, 2, 3, 2, 3, 4];
+// for(let item of arrr){
+// console.log(item)
+// }
+const letters = new Set();
+
+arrr.map((item) => letters.add(item));
+letters.forEach((i) => console.log(i));
+console.log("size=>" + letters.size);
+let xl = "yusuf ve yasin okula bugun basladilar ".split(" ");
+let max = "";
+let longest = [];
+for (let i = 0; i < xl.length; i++) {
+  if (xl[i].length > max.length) {
+    max = xl[i];
+    longest = [];
+    longest.push(xl[i]);
+  } else if (xl[i].length >= max.length) {
+    max = xl[i];
+    longest.push(max);
+  }
+}
+console.log(longest);
+
+//how manny letter in string
+
+let hx = "yusuf";
+let hy = {};
+for (let i = 0; i < hx.length; i++) {
+  if (!hy[hx[i]]) {
+    hy[hx[i]] = 1;
+  } else {
+    hy[hx[i]] += 1;
+  }
+}
+console.log(hy);
+
+//encok tekrar eden
+let xm = [5, 2, 2, 1, 5, 10, 10, 10];
+let ym = {};
+let maxx = 0;
+let resultt = [];
+for (let i = 0; i < xm.length; i++) {
+  if (!ym[xm[i]]) {
+    ym[xm[i]] = 1;
+  } else {
+    ym[xm[i]] += 1;
+  }
+  if (ym[xm[i]] > maxx) {
+    maxx = ym[xm[i]];
+    resultt.push(xm[i]);
+  }
+}
+console.log(resultt[resultt.length - 1]);
