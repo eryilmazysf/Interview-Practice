@@ -857,3 +857,102 @@ for (let i = 0; i < xm.length; i++) {
   }
 }
 console.log(resultt[resultt.length - 1]);
+
+//Given a stream of integers and a window size, calculate the moving average of // MovingAverage m = new MovingAverage(3);
+// m.next(1) = 1
+// m.next(10) = (1 + 10) / 2
+// m.next(3) = (1 + 10 + 3) / 3
+// m.next(5) = (10 + 3 + 5) / 3
+// all integers in the sliding window.
+class MovingAverage {
+  constructor(size) {
+    this.size = size;
+    this.items = [];
+    this.current = 0;
+    this.total = 0;
+  }
+  next(val) {
+    if (this.current < this.size) {
+      this.items.push(val);
+      this.current += 1;
+    } else {
+      this.items.shift();
+      this.items.push(val);
+    }
+
+    this.total = 0;
+    for (let i = 0; i < this.items.length; i++) {
+      this.total += this.items[i];
+    }
+    return this.total / this.current;
+  }
+}
+
+const m = new MovingAverage(3);
+console.log(m.next(1));
+console.log(m.next(10));
+console.log(m.next(3));
+console.log(m.next(5));
+
+//calback
+const posts = [
+  { title: "Post one", body: "post one body" },
+  { title: "Post two", body: "post two body" },
+];
+
+function getPost() {
+  setTimeout(() => {
+    let output = "";
+    posts.forEach((post) => {
+      output += `<li>${post.title}</li>`;
+    });
+    document.body.innerHTML = output;
+  }, 1000);
+}
+//getPost();
+function createPost(x, callback) {
+  setTimeout(() => {
+    posts.push(x);
+    callback();
+  }, 2000);
+}
+//createPost({ title: "Post three", body: "post three body" }, getPost);
+
+//Promise
+
+function createPost(x) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      posts.push(x);
+      const error = false;
+
+      if (!error) {
+        resolve();
+      } else {
+        reject("Error:something went wrong");
+      }
+    }, 2000);
+  });
+}
+//createPost({ title: "Post three", body: "post three body" }).then(getPost).catch(err=>console.log(err))
+
+//Promise All
+const promise1 = Promise.resolve("Hello world");
+const promise2 = 10;
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 2000, "Goodbye");
+});
+const promise4 = fetch("https://jsonplaceholder.typicode.com/users").then(
+  (res) => res.json()
+);
+Promise.all([promise1, promise2, promise3, promise4]).then((val) =>
+  console.log(val)
+);
+
+//Async await
+async function fetchUser() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  const data = await res.json();
+  console.log(data);
+}
+fetchUser();
